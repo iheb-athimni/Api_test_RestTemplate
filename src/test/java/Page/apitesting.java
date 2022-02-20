@@ -42,8 +42,8 @@ public class apitesting extends generalFunction {
         format.format(rndVar);
 
         headers.setContentType(MediaType.APPLICATION_JSON);
+        System.out.println("step 1 : Set up the Header Content Type ");
         headers.set(USER_AGENT, "Mozilla/5.0 Firefox/26.0");
-//        headers.setBasicAuth("morpheus","leader");
         String file = System.getProperty("user.dir")+"/src/test/resources/apiFile.json";
         File jsonFile = new File(file);
         String content = new String(Files.readAllBytes(jsonFile.toPath()));
@@ -51,12 +51,16 @@ public class apitesting extends generalFunction {
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
         writer.writeValue(jsonFile ,root);
         HttpEntity<String> request = new HttpEntity<>(root.toString(), headers);
+        System.out.println("step 2 : Set up the request Body ");
         propertySet();
         String theHosty = prop.getProperty("host");
+        System.out.println("step 3 : Set up the request Url ");
         ResponseEntity<String> response = restTemplate.postForEntity(theHosty,request,String.class);
-        System.out.println("test the new api Status   "+response.getStatusCode());
-        System.out.println("test the new api Body     "+response.getBody());
-        System.out.println("test the new api url "+response.getHeaders().getLocation());
+        System.out.println("step 4 : Sending the request ");
+        System.out.println("step 5 : Getting al response information ");
+
+        System.out.println("- response Status :"+response.getStatusCode());
+        System.out.println("- response Body   :"+response.getBody());
 
   //      headers.setContentType()
     }
