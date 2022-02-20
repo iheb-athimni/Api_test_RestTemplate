@@ -12,15 +12,15 @@ public class Hooks extends generalFunction{
         propertySet();
         System.out.println("step 0 :set the internal property ");
     }
-
-
-    @After
-    public void TearDown(){
-        if(driver != null){
-            removeDriver();
-            System.out.println("Closing the browser ");
-        }
-
-    }
+//
+//
+//    @After
+//    public void TearDown(){
+//        if(driver != null){
+//            removeDriver();
+//            System.out.println("Closing the browser ");
+//        }
+//
+//    }
 
 }

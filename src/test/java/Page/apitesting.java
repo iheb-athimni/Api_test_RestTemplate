@@ -24,6 +24,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import static com.google.common.net.HttpHeaders.USER_AGENT;
+
 
 @Component("apitesty")
 public class apitesting extends generalFunction {
@@ -40,7 +42,8 @@ public class apitesting extends generalFunction {
         format.format(rndVar);
 
         headers.setContentType(MediaType.APPLICATION_JSON);
-        //headers.set("Authorization",responseToken);
+        headers.set(USER_AGENT, "Mozilla/5.0 Firefox/26.0");
+//        headers.setBasicAuth("morpheus","leader");
         String file = System.getProperty("user.dir")+"/src/test/resources/apiFile.json";
         File jsonFile = new File(file);
         String content = new String(Files.readAllBytes(jsonFile.toPath()));
@@ -50,7 +53,7 @@ public class apitesting extends generalFunction {
         HttpEntity<String> request = new HttpEntity<>(root.toString(), headers);
         propertySet();
         String theHosty = prop.getProperty("host");
-        ResponseEntity<String> response = restTemplate.postForEntity(theHosty+rndVar,request,String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(theHosty,request,String.class);
         System.out.println("test the new api Status   "+response.getStatusCode());
         System.out.println("test the new api Body     "+response.getBody());
         System.out.println("test the new api url "+response.getHeaders().getLocation());
